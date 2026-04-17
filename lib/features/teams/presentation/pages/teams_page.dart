@@ -11,18 +11,18 @@ const _grupos = [
     etiqueta: 'NACIONES ANFITRIONAS',
     equipos: [
       TeamData(code: 'US', name: 'Estados Unidos', confederation: 'CONCACAF'),
-      TeamData(code: 'MX', name: 'México',          confederation: 'CONCACAF'),
-      TeamData(code: 'CA', name: 'Canadá',          confederation: 'CONCACAF'),
-      TeamData(code: 'NG', name: 'Nigeria',         confederation: 'CAF'),
+      TeamData(code: 'MX', name: 'México', confederation: 'CONCACAF'),
+      TeamData(code: 'CA', name: 'Canadá', confederation: 'CONCACAF'),
+      TeamData(code: 'NG', name: 'Nigeria', confederation: 'CAF'),
     ],
   ),
   (
     nombre: 'GRUPO B',
     etiqueta: 'SEMILLA 1: BRASIL',
     equipos: [
-      TeamData(code: 'BR', name: 'Brasil',    confederation: 'CONMEBOL'),
-      TeamData(code: 'ES', name: 'España',    confederation: 'UEFA'),
-      TeamData(code: 'JP', name: 'Japón',     confederation: 'AFC'),
+      TeamData(code: 'BR', name: 'Brasil', confederation: 'CONMEBOL'),
+      TeamData(code: 'ES', name: 'España', confederation: 'UEFA'),
+      TeamData(code: 'JP', name: 'Japón', confederation: 'AFC'),
       TeamData(code: 'MA', name: 'Marruecos', confederation: 'CAF'),
     ],
   ),
@@ -31,9 +31,9 @@ const _grupos = [
     etiqueta: 'SEMILLA 1: ARGENTINA',
     equipos: [
       TeamData(code: 'AR', name: 'Argentina', confederation: 'CONMEBOL'),
-      TeamData(code: 'FR', name: 'Francia',   confederation: 'UEFA'),
+      TeamData(code: 'FR', name: 'Francia', confederation: 'UEFA'),
       TeamData(code: 'AU', name: 'Australia', confederation: 'AFC'),
-      TeamData(code: 'SN', name: 'Senegal',   confederation: 'CAF'),
+      TeamData(code: 'SN', name: 'Senegal', confederation: 'CAF'),
     ],
   ),
 ];
@@ -101,7 +101,7 @@ class _TeamsPageState extends State<TeamsPage> {
         ),
       ),
       title: Text(
-        "THE PULSE OF '26",
+        "Copa Mundial '26",
         style: GoogleFonts.spaceGrotesk(
           fontSize: 16,
           fontWeight: FontWeight.w700,
@@ -117,7 +117,8 @@ class _TeamsPageState extends State<TeamsPage> {
           child: CircleAvatar(
             radius: 18,
             backgroundColor: AppColors.surfaceVariant,
-            child: const Icon(Icons.emoji_events_outlined, color: AppColors.onSurface, size: 18),
+            child: const Icon(Icons.emoji_events_outlined,
+                color: AppColors.onSurface, size: 18),
           ),
         ),
       ],
@@ -213,9 +214,11 @@ class _TeamsPageState extends State<TeamsPage> {
               onTap: () => setState(() => _filtroSeleccionado = i),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                 decoration: BoxDecoration(
-                  color: selected ? AppColors.secondary : AppColors.surfaceVariant,
+                  color:
+                      selected ? AppColors.secondary : AppColors.surfaceVariant,
                   borderRadius: BorderRadius.circular(20),
                   border: selected
                       ? null
@@ -226,7 +229,9 @@ class _TeamsPageState extends State<TeamsPage> {
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: selected ? AppColors.onSecondary : const Color(0xFFAAAAAA),
+                    color: selected
+                        ? AppColors.onSecondary
+                        : const Color(0xFFAAAAAA),
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -313,10 +318,10 @@ class _TeamsPageState extends State<TeamsPage> {
               child: Divider(color: AppColors.outline),
             ),
             const SizedBox(height: 8),
-            _drawerItem(Icons.groups_outlined,   'Equipos',    selected: true),
+            _drawerItem(Icons.groups_outlined, 'Equipos', selected: true),
             _drawerItem(Icons.calendar_month_outlined, 'Fixture'),
-            _drawerItem(Icons.emoji_events_outlined,  'Posiciones'),
-            _drawerItem(Icons.bar_chart_outlined,     'Quiniela'),
+            _drawerItem(Icons.emoji_events_outlined, 'Posiciones'),
+            _drawerItem(Icons.bar_chart_outlined, 'Quiniela'),
             const Spacer(),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
