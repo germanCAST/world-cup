@@ -51,39 +51,34 @@ class TeamsPage extends StatefulWidget {
 
 class _TeamsPageState extends State<TeamsPage> {
   int _filtroSeleccionado = 0;
-  int _navIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      drawer: _buildDrawer(context),
-      bottomNavigationBar: _buildBottomNav(),
-      body: CustomScrollView(
-        slivers: [
-          _buildAppBar(context),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildPhaseBadge(),
-                  const SizedBox(height: 16),
-                  _buildTitle(),
-                  const SizedBox(height: 12),
-                  _buildSubtitle(),
-                  const SizedBox(height: 24),
-                  _buildFilterChips(),
-                  const SizedBox(height: 28),
-                  _buildGroupList(),
-                  const SizedBox(height: 32),
-                ],
-              ),
+    // Sin Scaffold propio — el shell (ScaffoldWithNavBar) lo provee
+    return CustomScrollView(
+      slivers: [
+        _buildAppBar(context),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildPhaseBadge(),
+                const SizedBox(height: 16),
+                _buildTitle(),
+                const SizedBox(height: 12),
+                _buildSubtitle(),
+                const SizedBox(height: 24),
+                _buildFilterChips(),
+                const SizedBox(height: 28),
+                _buildGroupList(),
+                const SizedBox(height: 32),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -94,6 +89,7 @@ class _TeamsPageState extends State<TeamsPage> {
       pinned: true,
       backgroundColor: AppColors.background,
       elevation: 0,
+      // Builder para obtener el contexto correcto del Scaffold del shell
       leading: Builder(
         builder: (ctx) => IconButton(
           icon: const Icon(Icons.menu, color: AppColors.primary),
@@ -117,8 +113,11 @@ class _TeamsPageState extends State<TeamsPage> {
           child: CircleAvatar(
             radius: 18,
             backgroundColor: AppColors.surfaceVariant,
-            child: const Icon(Icons.emoji_events_outlined,
-                color: AppColors.onSurface, size: 18),
+            child: const Icon(
+              Icons.emoji_events_outlined,
+              color: AppColors.onSurface,
+              size: 18,
+            ),
           ),
         ),
       ],
@@ -187,8 +186,7 @@ class _TeamsPageState extends State<TeamsPage> {
         ),
         children: const [
           TextSpan(
-            text:
-                'Explora las 48 naciones que compiten por el título definitivo '
+            text: 'Explora las 48 naciones que compiten por el título definitivo '
                 'en la Copa del Mundo más grande de la historia a través de ',
           ),
           TextSpan(
@@ -214,11 +212,9 @@ class _TeamsPageState extends State<TeamsPage> {
               onTap: () => setState(() => _filtroSeleccionado = i),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                 decoration: BoxDecoration(
-                  color:
-                      selected ? AppColors.secondary : AppColors.surfaceVariant,
+                  color: selected ? AppColors.secondary : AppColors.surfaceVariant,
                   borderRadius: BorderRadius.circular(20),
                   border: selected
                       ? null
@@ -229,9 +225,7 @@ class _TeamsPageState extends State<TeamsPage> {
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: selected
-                        ? AppColors.onSecondary
-                        : const Color(0xFFAAAAAA),
+                    color: selected ? AppColors.onSecondary : const Color(0xFFAAAAAA),
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -262,96 +256,6 @@ class _TeamsPageState extends State<TeamsPage> {
           },
         );
       },
-    );
-  }
-
-  // ── Bottom Navigation Bar ──────────────────────────────────────────────────
-
-  Widget _buildBottomNav() {
-    return NavigationBar(
-      selectedIndex: _navIndex,
-      onDestinationSelected: (i) => setState(() => _navIndex = i),
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.groups_outlined),
-          selectedIcon: Icon(Icons.groups),
-          label: 'Equipos',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.calendar_month_outlined),
-          selectedIcon: Icon(Icons.calendar_month),
-          label: 'Fixture',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.bar_chart_outlined),
-          selectedIcon: Icon(Icons.bar_chart),
-          label: 'Quiniela',
-        ),
-      ],
-    );
-  }
-
-  // ── Drawer / Sidebar ───────────────────────────────────────────────────────
-
-  Widget _buildDrawer(BuildContext context) {
-    return Drawer(
-      backgroundColor: AppColors.surface,
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Logo / título
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
-              child: Text(
-                "THE PULSE OF '26",
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  fontStyle: FontStyle.italic,
-                  color: AppColors.primary,
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Divider(color: AppColors.outline),
-            ),
-            const SizedBox(height: 8),
-            _drawerItem(Icons.groups_outlined, 'Equipos', selected: true),
-            _drawerItem(Icons.calendar_month_outlined, 'Fixture'),
-            _drawerItem(Icons.emoji_events_outlined, 'Posiciones'),
-            _drawerItem(Icons.bar_chart_outlined, 'Quiniela'),
-            const Spacer(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Divider(color: AppColors.outline),
-            ),
-            _drawerItem(Icons.settings_outlined, 'Configuración'),
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _drawerItem(IconData icon, String label, {bool selected = false}) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-      leading: Icon(
-        icon,
-        color: selected ? AppColors.primary : const Color(0xFF7A7A7A),
-        size: 22,
-      ),
-      title: Text(
-        label,
-        style: GoogleFonts.plusJakartaSans(
-          fontSize: 14,
-          fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-          color: selected ? AppColors.primary : AppColors.onSurface,
-        ),
-      ),
-      onTap: () {},
     );
   }
 }
