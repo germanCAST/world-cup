@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
+import 'features/teams/presentation/pages/teams_page.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});
@@ -11,11 +12,7 @@ class App extends ConsumerWidget {
       title: 'Mundial 2026',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: const Scaffold(
-        body: Center(
-          child: Text('Mundial 2026'),
-        ),
-      ),
+      home: const TeamsPage(),
     );
   }
 }
